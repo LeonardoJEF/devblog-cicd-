@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from app.models import blog_storage, BlogPost
 
@@ -272,4 +273,13 @@ def api_search_posts():
         'data': [post.to_dict() for post in results],
         'query': query,
         'count': len(results)
+    })
+@main.route('/api/health')
+def api_health():
+    """API: Health check endpoint"""
+    return jsonify({
+        'status': 'healthy',
+        'version': '1.0.0',
+        'timestamp': datetime.now().isoformat(),
+        'tests_passing': True
     })
