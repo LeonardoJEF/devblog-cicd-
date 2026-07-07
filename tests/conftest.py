@@ -93,7 +93,8 @@ def selenium_driver():
     chrome_options.add_argument('--window-size=1920,1080')
 
     import os
-    chromedriver_path = os.environ.get('CHROMEDRIVER_PATH')
+    import shutil
+    chromedriver_path = shutil.which('chromedriver')
     if chromedriver_path:
         service = Service(chromedriver_path)
     else:
