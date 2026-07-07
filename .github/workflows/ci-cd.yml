@@ -79,7 +79,7 @@ jobs:
       - name: Install Chrome browser
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y google-chrome-stable chromium-chromedriver
 
       - name: Install Python dependencies
         run: |
@@ -88,6 +88,7 @@ jobs:
 
       - name: Run E2E tests
         run: |
+          export CHROMEDRIVER_PATH=$(which chromedriver)
           pytest tests/test_e2e_basic.py -v --tb=short
         env:
           DISPLAY: :99

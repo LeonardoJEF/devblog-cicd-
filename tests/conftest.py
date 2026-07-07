@@ -92,7 +92,13 @@ def selenium_driver():
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--window-size=1920,1080')
 
-    service = Service(ChromeDriverManager().install())
+    import os
+    chromedriver_path = os.environ.get('CHROMEDRIVER_PATH')
+    if chromedriver_path:
+        service = Service(chromedriver_path)
+    else:
+        service = Service(ChromeDriverManager().install())
+
     driver = webdriver.Chrome(service=service, options=chrome_options)
     driver.implicitly_wait(10)
     yield driver
